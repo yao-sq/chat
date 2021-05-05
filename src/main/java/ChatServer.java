@@ -14,9 +14,17 @@ public class ChatServer {
                 Socket socket = serverSocket.accept();
                 System.out.println("New client connected");
 
+                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-                writer.println(new Date().toString());
 
+                String text;
+                do {
+                    text = reader.readLine();
+                    String reverseText = new StringBuilder(text).reverse().toString();
+                    writer.println("Server: " + reverseText);
+                } while (text != null && !text.equals("bye"));
+
+                socket.close();
             }
 
 //            // Read data from the client
@@ -32,7 +40,6 @@ public class ChatServer {
 //
 //            // Terminate the server
 //            serverSocket.close();
-
 
         } catch (IOException e) {
             System.out.println("Server exception: " + e.getMessage());
