@@ -10,7 +10,6 @@ public class ChatClient {
         try (Socket socket = new Socket(hostname, port)){
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 
-
 //            Console console= System.console();
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String text;

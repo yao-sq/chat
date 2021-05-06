@@ -14,17 +14,7 @@ public class ChatServer {
                 Socket socket = serverSocket.accept();
                 System.out.println("New client connected");
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-
-                String text;
-                do {
-                    text = reader.readLine();
-                    String reverseText = new StringBuilder(text).reverse().toString();
-                    writer.println("Server: " + reverseText);
-                } while (text != null && !text.equals("bye"));
-
-                socket.close();
+                new ServerThread(socket).start();
             }
 
 //            // Read data from the client
