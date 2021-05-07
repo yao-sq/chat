@@ -1,8 +1,11 @@
+import utils.Arguments;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class ChatServer {
@@ -38,9 +41,10 @@ public class ChatServer {
             System.exit(0);
         }
 
-        int port = Integer.parseInt( args[0]);
+        int port = Integer.parseInt( Arguments.parse(args).getOrDefault("-csp", "14001"));
         ChatServer chatServer = new ChatServer(port);
         chatServer.execute();
+        chatServer.listenForStopCommand();
     }
 
     void broadcast(String message, UserThread excludeUserThread){
@@ -71,6 +75,18 @@ public class ChatServer {
         return !this.userNames.isEmpty();
     }
 
-
+    public void listenForStopCommand(){
+        new Thread( () -> {
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                String line = scanner.nextLine();
+                if ( "EXIT".equals(line)){
+//                    stop();
+                    System.exit(0);
+                    break;
+                }
+            }
+        } , "Server stop listener").start();
+    }
 
 }

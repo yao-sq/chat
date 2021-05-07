@@ -1,3 +1,5 @@
+import utils.Arguments;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -40,8 +42,8 @@ public class ChatClient {
     public static void main(String[] args) {
         if (args.length <2 ) return;
 
-        String hostname = args[0];
-        int port = Integer.parseInt(args[1]);
+        String hostname = Arguments.parse(args).getOrDefault("-cca", "localhost");
+        int port = Integer.parseInt( Arguments.parse(args).getOrDefault("-ccp", "14001"));
 
         ChatClient client = new ChatClient(hostname, port);
         client.execute();
