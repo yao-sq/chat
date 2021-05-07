@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ReadThread extends Thread {
     private BufferedReader reader;
@@ -30,7 +28,12 @@ public class ReadThread extends Thread {
                 if (chatClient.getUserName() != null) {
                     System.out.print("[" + chatClient.getUserName() + "]: ");
                 }
-            } catch (IOException e) {
+            }
+            catch ( SocketException e ) {
+                System.out.println("Client " +  chatClient.getUserName() +" is disconnected");
+                break;
+            }
+            catch (IOException e) {
                 System.out.println("Error reading from server: " + e.getMessage());
                 e.printStackTrace();
                 break;

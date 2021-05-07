@@ -30,7 +30,7 @@ public class UserThread extends Thread{
                 clientMessage = reader.readLine();
                 serverMessage = "[" + userName + "]: " + clientMessage;
                 chatServer.broadcast(serverMessage, this);
-            } while ( !clientMessage.equals("bye"));
+            } while ( clientMessage!= null && !clientMessage.equals("bye"));
 
             chatServer.removeUser(userName, this);
             socket.close();
