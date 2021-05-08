@@ -40,7 +40,7 @@ public class ChatClient {
     }
 
     public static void main(String[] args) {
-        if (args.length <2 ) return;
+//        if (args.length <2 ) return;
 
         String hostname = Arguments.parse(args).getOrDefault("-cca", "localhost");
         int port = Integer.parseInt( Arguments.parse(args).getOrDefault("-ccp", "14001"));

@@ -22,12 +22,13 @@ public class ReadThread extends Thread {
     public void run(){
         while (true) {
             try {
+//                if (chatClient.getUserName() != null) {
+//                    System.out.print("[" + chatClient.getUserName() + "]: ");
+//                }
+
                 String response = reader.readLine();
                 System.out.println( response);
 
-                if (chatClient.getUserName() != null) {
-                    System.out.print("[" + chatClient.getUserName() + "]: ");
-                }
             }
             catch ( SocketException e ) {
                 System.out.println("Client " +  chatClient.getUserName() +" is disconnected");
