@@ -7,7 +7,6 @@ public class Arguments extends LinkedHashMap<String, String> {
     private String prefix = "-";
 
     public Arguments(){
-
     }
 
     public Arguments(String prefix){
@@ -25,12 +24,12 @@ public class Arguments extends LinkedHashMap<String, String> {
         int keyPosition = 0;
         for (String arg: args) {
             if (arg.startsWith(prefix)){
-                if ( key != null){
+                if ( key != null && this.get(key) == null){
                     this.put(key, null);
                 }
                 key = arg;;
             } else {
-                this.put( key!=null ? key: String.valueOf(keyPosition++), arg);
+                this.put( key != null ? key: String.valueOf(keyPosition++), arg);
             }
         }
     }
