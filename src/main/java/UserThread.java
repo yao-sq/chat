@@ -1,3 +1,5 @@
+import utils.Arguments;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -28,7 +30,8 @@ public class UserThread extends Thread{
 
             do {
                 clientMessage = reader.readLine();
-                serverMessage = "[" + userName + "]: " + clientMessage;
+                String template = Arguments.appArgs.getOrDefault("template", "[%s]: %s");
+                serverMessage = String.format(template, userName, clientMessage);
                 chatServer.broadcast(serverMessage, this);
             } while ( clientMessage!= null && !clientMessage.equals("bye"));
 

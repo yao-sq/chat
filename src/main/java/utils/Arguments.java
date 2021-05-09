@@ -3,6 +3,7 @@ package utils;
 import java.util.LinkedHashMap;
 
 public class Arguments extends LinkedHashMap<String, String> {
+    public static Arguments appArgs;
 
     private String prefix = "-";
 
@@ -26,7 +27,8 @@ public class Arguments extends LinkedHashMap<String, String> {
             if (arg.startsWith(prefix)){
                 key = arg;
             } else {
-                this.put( key != null && this.get(key)==null ? key: String.valueOf(keyPosition++), arg);
+                this.put( key != null ? key : String.valueOf(keyPosition++), arg);
+                key = null;
             }
         }
     }

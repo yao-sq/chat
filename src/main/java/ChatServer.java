@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import static utils.Arguments.appArgs;
+
 public class ChatServer {
     private int port;
     private Set<String> userNames = new HashSet<>();
@@ -36,12 +38,8 @@ public class ChatServer {
     }
 
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("Syntax: java ChatServer <port-number>");
-            System.exit(0);
-        }
-
-        int port = Integer.parseInt( Arguments.parse(args).getOrDefault("-csp", "14001"));
+        appArgs = Arguments.parse(args);
+        int port = Integer.parseInt( appArgs.getOrDefault("-csp", "14001"));
         ChatServer chatServer = new ChatServer(port);
         chatServer.execute();
         chatServer.listenForStopCommand();

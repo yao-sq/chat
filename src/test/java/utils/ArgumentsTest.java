@@ -1,10 +1,9 @@
 package utils;
 
 import org.junit.jupiter.api.Test;
-import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ArgumentsTest {
+public class ArgumentsTest {
     @Test
     void loadAppArgs() {
         String[] arguments = "-cca 192.168.10.250 -ccp 14001".split(" ");
